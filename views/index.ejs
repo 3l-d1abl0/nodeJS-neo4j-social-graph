@@ -2,48 +2,82 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   </head>
   <body>
     <!--
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     -->
-    <div class="add-persons">
-      <h2>Add Person</h2>
-      <form method="POST" action="/addPerson">
-        <input type="text" name="person-name" plceholder="Enter Person Name"></input>
-        <input type="submit" value="Add Person"></input>
-      </form>
 
-      <div class="persons">
-        <h3>Persons Available :</h3>
-        <ul>
-            <%persons.forEach(function(person){ %>
-              <li> <%=person.name %> </li>
-              <%})%>
-        </ul>
-      </div>
-
+  <nav class="navbar navbar-dark bg-dark mb-4">
+    <div class="container">
+      <a class="navbar-brand" href="/">Social Graph</a>
     </div>
-    <br><br>
-    <div class="add-locations">
-      <h2>Add Location</h2>
-      <form method="POST" action="/addLocation">
-        <input type="text" name="city" plceholder="Enter city"></input>
-        <input type="text" name="state" plceholder="Enter state"></input>
-        <input type="submit" value="Add Location"></input>
-      </form>
+  </nav>
 
-      <div class="locations">
-        <h2>Locations Available :</h2>
-        <ul>
-          <% locations.forEach(function(location){ %>
-            <li> <%=location%> </li>
-          <% }) %>
-        </ul>
+  <div class="container">
+    <div class="row">
+
+          <div class="add-persons col-md-10">
+            <h2>Add Person</h2>
+            <form method="POST" action="/users/addPerson">
+              <input type="text" name="person-name" placeholder="Enter Person Name"></input>
+              <input type="submit" value="Add Person" class="btn btn-dark" ></input>
+            </form>
+            <br>
+            <div class="persons">
+              <h3>Persons Available :</h3>
+              <div class="row">
+                  <%persons.forEach(function(person){ %>
+                    <div class="col-md-5">
+                      <div class="card card-body bg-light"><%=person.name %> </div>
+                    </div>
+                    <%})%>
+                  </div>
+            </div>
+          </div>
+    </div>
+  </div>
+  <br><br>
+  <div class="container">
+    <div class="row">
+        
+          <div class="add-locations col-md-10">
+            <h2>Add Location</h2>
+            <form method="POST" action="/users/addLocation">
+              <input type="text" name="city" placeholder="Enter city"></input>
+              <input type="text" name="state" placeholder="Enter state"></input>
+              <input type="submit" value="Add Location" class="btn btn-dark"></input>
+            </form>
+            <br>
+            <div class="locations">
+              <h2>Locations Available :</h2>
+              <div class="row">
+                <% locations.forEach(function(location){ %>
+                  <div class="col-md-5">
+                    <div class="card card-body bg-light"> <%=location%> </div>
+                  </div>
+                <% }) %>
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>
+  <br><br>
+  <div class="container">
+    <div class="row">
+          <div class="add-work col-md-12">
+            <h2>Add Workplace</h2>
+            <form method="POST" action="/users/addWork">
+              <input type="text" name="name" placeholder="firstname lastname"></input>
+              <input type="text" name="place" placeholder="city , state"></input>
+              <input type="number" name="year" placeholder="Enter Year"></input>
+              <input type="submit" value="Add Location" class="btn btn-dark"></input>
+            </form>
+          </div>
+
       </div>
-
     </div>
 
   </body>
