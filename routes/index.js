@@ -43,7 +43,7 @@ router.get('/', function(req, res, next) {
               //console.log(locations_list);
 
               res.render('index', {
-                  title: 'Express',
+                  title: 'Social-Graph',
                   persons: persons_list,
                   locations: locations_list
               });
@@ -60,46 +60,5 @@ router.get('/', function(req, res, next) {
 
   //res.render('index', { title: 'Express' });
 });
-
-/*Accept POST to add person*/
-router.post('/addPerson', function(req, res, next){
-  //console.log(req.body);
-  let person = req.body["person-name"].split(" ");
-  //console.log(person);
-
-  session
-    .run(`CREATE(n:Person {first_name: '${person[0]}', last_name: '${person[1]}' } ) RETURN n`)
-    .then(function(result){
-      //console.log(`Result : ${result}`);
-      res.redirect('/');
-      //session.close();
-
-    })
-    .catch(function(error){
-      console.log(`/addperson ${error}`);
-    })
-
-});
-
-/*Accept POST to add Locations*/
-router.post('/addLocation', function(req, res, next){
-  //console.log(req.body);
-
-  let city = req.body["city"];
-  let state = req.body.state;
-
-  session
-    .run(`CREATE(n:Location {city: '${city}', state: '${state}'})`)
-    .then(function(result){
-      //console.log(`Result : ${result}`);
-      res.redirect('/');
-    })
-    .catch(function(error){
-      console.log(`/addperson ${error}`);
-    })
-
-});
-
-
 
 module.exports = router;
