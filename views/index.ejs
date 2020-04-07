@@ -12,27 +12,38 @@
     <div class="add-persons">
       <h2>Add Person</h2>
       <form method="POST" action="/addPerson">
-        <input type="text" name="person-name" plceholder="Name"></input>
+        <input type="text" name="person-name" plceholder="Enter Person Name"></input>
         <input type="submit" value="Add Person"></input>
       </form>
-    </div>
 
-    <div class="persons">
-      <h2>Persons</h2>
-      <ul>
-          <%persons.forEach(function(person){ %>
-            <li> <%=person.name %> </li>
-            <%})%>
-      </ul>
-    </div>
+      <div class="persons">
+        <h3>Persons Available :</h3>
+        <ul>
+            <%persons.forEach(function(person){ %>
+              <li> <%=person.name %> </li>
+              <%})%>
+        </ul>
+      </div>
 
-    <div class="locations">
-      <h2>Locations</h2>
-      <ul>
-        <% locations.forEach(function(location){ %>
-          <li> <%=location%> </li>
-        <% }) %>
-      </ul>
+    </div>
+    <br><br>
+    <div class="add-locations">
+      <h2>Add Location</h2>
+      <form method="POST" action="/addLocation">
+        <input type="text" name="city" plceholder="Enter city"></input>
+        <input type="text" name="state" plceholder="Enter state"></input>
+        <input type="submit" value="Add Location"></input>
+      </form>
+
+      <div class="locations">
+        <h2>Locations Available :</h2>
+        <ul>
+          <% locations.forEach(function(location){ %>
+            <li> <%=location%> </li>
+          <% }) %>
+        </ul>
+      </div>
+
     </div>
 
   </body>

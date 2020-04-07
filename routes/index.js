@@ -25,7 +25,6 @@ router.get('/', function(req, res, next) {
 
           var persons_list =[];
           result.records.forEach(function(record){
-            console.log(record._fields[0]);
               persons_list.push({
                 id: record._fields[0].identity.low,
                 name: record._fields[0].properties.first_name+' '+record._fields[0].properties.last_name
@@ -40,8 +39,8 @@ router.get('/', function(req, res, next) {
                 locations_list.push(`${record._fields[0].properties.city} , ${record._fields[0].properties.state}`);
               });
 
-              console.log(persons_list);
-              console.log(locations_list);
+              //console.log(persons_list);
+              //console.log(locations_list);
 
               res.render('index', {
                   title: 'Express',
@@ -64,14 +63,14 @@ router.get('/', function(req, res, next) {
 
 /*Accept POST to add person*/
 router.post('/addPerson', function(req, res, next){
-  console.log(req.body);
+  //console.log(req.body);
   let person = req.body["person-name"].split(" ");
-  console.log(person);
+  //console.log(person);
 
   session
     .run(`CREATE(n:Person {first_name: '${person[0]}', last_name: '${person[1]}' } ) RETURN n`)
     .then(function(result){
-      console.log(`Result : ${result}`);
+      //console.log(`Result : ${result}`);
       res.redirect('/');
       //session.close();
 
@@ -81,5 +80,26 @@ router.post('/addPerson', function(req, res, next){
     })
 
 });
+
+/*Accept POST to add Locations*/
+router.post('/addLocation', function(req, res, next){
+  //console.log(req.body);
+
+  let city = req.body["city"];
+  let state = req.body.state;
+
+  session
+    .run(`CREATE(n:Location {city: '${city}', state: '${state}'})`)
+    .then(function(result){
+      //console.log(`Result : ${result}`);
+      res.redirect('/');
+    })
+    .catch(function(error){
+      console.log(`/addperson ${error}`);
+    })
+
+});
+
+
 
 module.exports = router;
